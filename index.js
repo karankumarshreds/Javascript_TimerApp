@@ -1,23 +1,21 @@
-class Timer {
-    constructor(durationInput, startButton, pauseButton) {
-        this.durationInput = durationInput;
-        this.startButton = startButton;
-        this.pauseButton = pauseButton;
-        //onclick
-        this.startButton.addEventListener('click', this.start);
-    }
-    //we are using the arrow function so that the scope 
-    //of 'this' is actually global, which means it represents
-    //the actual instance of the timer class and not the 
-    //element alone so that we could use the other properties
-    //and methods of the TIMER class!
-    start = () => {
-        console.log(this);
-    }
-}
-
 const durationInput = document.querySelector('#duration');
 const startButton = document.querySelector('#start');
 const pauseButton = document.querySelector('#pause');
 
-const timer = new Timer(durationInput, startButton, pauseButton);
+//passing the additional callback functions to tell the outside world,
+//in our case the graphic function, the events happening inside our class
+//This can be done by using callback funtions while creating an object
+const timer = new Timer(durationInput, startButton, pauseButton,{
+    onStart(){
+        console.log('Timer started');
+    },
+    onClick(){
+        console.log('Timer just ticked down');
+    },
+    onComplete(){
+        console.log('Timer is completed');
+    }
+});
+
+
+
