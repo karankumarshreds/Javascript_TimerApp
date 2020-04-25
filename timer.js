@@ -20,14 +20,14 @@ class Timer {
     //and methods of the TIMER class!
 
     start = () => {
-        if (this.onStart){
-            this.onStart();
+        if (this.onStart){//passing initial value
+            this.onStart(this.timeRemaining);
         };
         //start function handles the time given by the user and 
         //invokes the tick method to start ticking
         this.tick() //since the below method will start ticking 
         //after a second has been passed so manually invoking
-        this.interval = setInterval(this.tick, 1000);
+        this.interval = setInterval(this.tick, 50);
         //this.interval because to share values inbetween methods,
         //we need to use instance variables. Hence this.interval &
         //not 'const timer '
@@ -43,15 +43,15 @@ class Timer {
         // const value = this.durationInput.value;
         // this.durationInput.value = value - 1;
         // set func = <value: time>
-        if (this.timeRemaining === 0){
+        if (this.timeRemaining <= 0){
             this.pause();
             if (this.onComplete){
                 this.onComplete();
             }
         } else{
-            this.timeRemaining = this.timeRemaining -1;
+            this.timeRemaining = this.timeRemaining - 0.05;
             if (this.onClick){
-                this.onClick();
+                this.onClick(this.timeRemaining);
             }
         }
     };
@@ -62,7 +62,7 @@ class Timer {
     };
 
     set timeRemaining(time){
-        return this.durationInput.value = time;
+        return this.durationInput.value = time.toFixed(2);  //upto only two decimal places
     };
 
 }
